@@ -7,8 +7,8 @@ class NotesController < ApplicationController
 
   def index
      if user_signed_in?
-      @created_notes = current_user.created_notes.all
-      @shared_with_notes = current_user.note_users.all
+      @created_notes = current_user.created_notes.all.order(updated_at: :desc)
+      @shared_with_notes = current_user.note_users.all.order(updated_at: :desc)
     else
       redirect_to user_session_path
     end

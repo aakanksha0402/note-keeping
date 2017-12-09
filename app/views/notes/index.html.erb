@@ -6,35 +6,30 @@
       <div class="notes-container">
 
         <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation" class="active"><a href="#my" aria-controls="my" role="tab" data-toggle="tab">My Notes</a></li>
-          <li role="presentation"><a href="#shared" aria-controls="shared" role="tab" data-toggle="tab">Shared Notes</a></li>
+          <li role="presentation" class="active">
+            <a href="#my-notes" aria-controls="my-notes" role="tab" data-toggle="tab">My Notes</a>
+          </li>
+          <li role="presentation">
+            <a href="#shared-notes" aria-controls="shared-notes" role="tab" data-toggle="tab">Shared Notes</a>
+          </li>
           <li role="presentation" class="pull-right">
-            <a href="#" class="new">
-              <%= link_to new_note_path, remote: true do %>
-                <img src="https://image.flaticon.com/icons/png/512/148/148764.png" width="14" alt="">
-              New
-              <% end %>
+            <%= link_to new_note_path, remote: true, class: "new" do %>
+              <img src="https://image.flaticon.com/icons/png/512/148/148764.png" width="14" alt="">
+            New
+            <% end %>
           </li>
         </ul>
 
         <!-- Tab panes -->
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="my-notes">
-            <%= render partial: "note", locals: {notes: @created_notes} %>
+            <%= render partial: "notes", locals: { notes: @created_notes } %>
           </div>
-          <div role="tabpanel" class="tab-pane" id="shared">
+          <div role="tabpanel" class="tab-pane" id="shared-notes">
             <ul class="list">
               <% @shared_with_notes.each do |user_note| %>
-                <li>
-                  <div class="media" data-note-id="<%= user_note.note.id %>">
-                    <%= link_to note_path(user_note.note), remote: true do %>
-                      <div class="media-body">
-                        <h4 class="media-heading"><%= user_note.note.formatted_title %></h4>
-                        <p><%= formatted_body(user_note.note) %></p>
-                      </div>
-                    <% end %>
-                  </div>
-                </li>
+                <% note = user_note.note %>
+                <%= render partial: 'note', locals: { note: note } %>
               <% end %>
             </ul>
           </div>

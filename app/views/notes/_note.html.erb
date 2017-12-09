@@ -1,14 +1,10 @@
-<ul class="list">
-  <% notes.each do |note| %>
-      <li>
-        <div class="media" data-note-id="<%= note.id %>">
-          <%= link_to note_path(note), remote: true do %>
-            <div class="media-body">
-              <h4 class="media-heading"><%= note.formatted_title %></h4>
-              <p><%= formatted_body(note) %></p>
-            </div>
-          <% end %>
-        </div>
-      </li>
-  <% end %>
-</ul>
+<li>
+  <div class="media" data-note-id="<%= note.id %>">
+    <%= link_to note_path(note), remote: true do %>
+      <div class="media-body">
+        <h4 class="media-heading"><%= note.formatted_title %></h4>
+        <p><%= formatted_body(note) %></p>
+      </div>
+    <% end %>
+  </div>
+</li>
