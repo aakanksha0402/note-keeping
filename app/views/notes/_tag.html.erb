@@ -1,0 +1,14 @@
+<div>
+  <h3><b>Add Tags</b></h3>
+  <%= form_tag add_tags_note_path(@note), remote: true do %>
+    <%= text_field_tag :tags %>
+    <%= submit_tag "Add Tag" %>
+  <% end %>
+</div>
+
+<b>Tags:</b>
+<ul>
+  <% @note.tags.each do |tag| %>
+    <li><%= tag.name %> <%= link_to "Remove", remove_tag_note_path(tag_id: tag.id), remote: true, method: :delete %></li>
+  <% end %>
+<ul>

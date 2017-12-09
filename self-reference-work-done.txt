@@ -1,0 +1,18 @@
+Work done for self reference:
+
+6th Dec, 2017 (11:15 PM - 11:40 PM): Initialize App.
+
+7th Dec, 2017 (11:00 PM - 12:00 AM): Integrate User using devise (Basic Set Up). Create Notes Table.
+
+9th Dec, 2017 (5:00 PM - 11:00 PM):  1. Prepare associations of notes and users.
+                                     2. Create notes with vailidations and scopes.
+                                     3. Allow Sharing and validate note_users.
+                                     4. Add permissions to note sharing.
+                                     5. Based on permissions, restrict actions.
+                                     6. Integrate basic UI through out.
+                                     7. Use AJAX through out and code clean.
+                                     8. Fixes.
+
+10th Dec, 2017 (Start - End          1. UI Fixes throughout.
+                                     2. Bugs Fixes.
+                                     3. Improvements and finishing touches.

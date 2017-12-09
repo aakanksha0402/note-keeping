@@ -6,9 +6,12 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-random_user1 = User.create(email: Faker::Internet.email, password: "password")
-random_user2 = User.create(email: Faker::Internet.email, password: "password")
+Permission.create(name: "read")
+Permission.create(name: "update")
+Permission.create(name: "share")
 
+user1 = User.create(email: Faker::Internet.email, password: "password")
+user2 = User.create(email: Faker::Internet.email, password: "password")
 
-random_note1 = random_user1.notes.create(body: Faker::Lorem.paragraph(2))
-random_note2 = random_user2.notes.create(body: Faker::Lorem.paragraph(2))
+random_note1 = user1.created_notes.create(body: Faker::Lorem.paragraph(2))
+random_note2 = user2.created_notes.create(body: Faker::Lorem.paragraph(2))

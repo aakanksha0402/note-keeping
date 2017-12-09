@@ -1,0 +1,45 @@
+<%= content_for :body_class, "notes" %>
+<div class="container">
+  <div class="row">
+
+    <div class="col-sm-4 no-gutter-right">
+      <div class="notes-container">
+
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active">
+            <a href="#my-notes" aria-controls="my-notes" role="tab" data-toggle="tab">My Notes</a>
+          </li>
+          <li role="presentation">
+            <a href="#shared-notes" aria-controls="shared-notes" role="tab" data-toggle="tab">Shared Notes</a>
+          </li>
+          <li role="presentation" class="pull-right">
+            <%= link_to new_note_path, remote: true, class: "new" do %>
+              <img src="https://image.flaticon.com/icons/png/512/148/148764.png" width="14" alt="">
+            New
+            <% end %>
+          </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="my-notes">
+            <%= render partial: "notes", locals: { notes: @created_notes } %>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="shared-notes">
+            <ul class="list">
+              <% @shared_with_notes.each do |user_note| %>
+                <% note = user_note.note %>
+                <%= render partial: 'note', locals: { note: note } %>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-sm-8 no-gutter-left">
+      <div class="note-container" id="note_container">
+      </div>
+    </div>
+  </div>
+</div>

@@ -39,10 +39,20 @@ gem 'jbuilder', '~> 2.5'
 # Authentication
 gem 'devise'
 
+gem 'twitter-bootstrap-rails'
+
+gem "select2-rails"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
+
+  # gem 'rspec-rails', '~> 3.6'
+  # gem 'rspec-activemodel-mocks', '= 1.0.1'
+  # gem 'rspec-collection_matchers'
+  # gem 'rails-controller-testing'
+  # gem 'shoulda-matchers', '= 2.8.0'
 end
 
 group :development do
@@ -53,6 +63,11 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
+
+# group :test do
+#   gem "factory_bot_rails"
+#   gem 'database_cleaner'
+# end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
