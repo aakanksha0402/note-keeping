@@ -1,0 +1,5 @@
+$('.all-users').html("<%=j render partial: 'user' %>")
+
+$(".share-notes" ).select2();
+$(".notes-permissions" ).select2();
+setInterval(function(){ autoSaveNote('textarea.paper.edit-note'); }, 10000);

@@ -8,7 +8,29 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="<%= yield :body_class %>">
+    <%= nav_bar static: :top, brand: "Simpler Notes", responsive: true do %>
+      <%= menu_group do %>
+        <%#= menu_item "Home", root_path %>
+        <%#= menu_divider %>
+        <%= menu_item "Notes", root_path %>
+      <% end %>
+      <%= menu_group pull: :right do %>
+        <% if current_user %>
+          <%= menu_item "Log Out (#{current_user.email})", destroy_user_session_path, method: :delete %>
+        <% else %>
+          <%= menu_item "Log In", user_session_path %>
+          <%= menu_item "Sign Up", new_user_registration_path %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <%#= text_field_tag "search-field", nil, placeholder: "Search", autocomplete: 'off', spellcheck: false, data: {url: search_index_path(format: :json)} %>
+
+    <ul class="dropdown results" id='search-results'>
+    </ul>
     <%= yield %>
+
+    <%= yield :script %>
   </body>
 </html>

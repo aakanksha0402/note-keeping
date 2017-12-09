@@ -1,0 +1,41 @@
+
+<a href="javascript:void(0)" class="pull-right fab-button btn btn-danger"><span onclick="openNav()">Actions</span></a>
+
+<% if @permissions["1"] == "true" && @permissions["2"] == "true" %>
+  <textarea class="paper edit-note" data-note-id="<%= @note.id %>"><%= @note.body %></textarea>
+<% elsif @permissions["1"] == "true" %>
+  <textarea class="paper" data-note-id="<%= @note.id %>"><%= @note.body %></textarea>
+<% else %>
+  <h4>You do not have the permission to view this note.</h4>
+<% end %>
+
+<% if @permissions["2"] == "true" %>
+  <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+    <div>
+      <% if @permissions["3"] == "true" %>
+        <div class="all-users">
+          <%= render partial: 'user' %>
+        </div>
+      <% end %>
+
+      <div class="all-tags">
+        <%= render partial: 'tag' %>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $(".share-notes" ).select2();
+    $(".notes-permissions" ).select2();
+    setInterval(function(){ autoSaveNote('textarea.paper.edit-note'); }, 10000);
+  </script>
+
+<% else %>
+  <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <h4>You do not have the permission to perform any actions on this note.</h4>
+    <div>
+  </div>
+<% end %>

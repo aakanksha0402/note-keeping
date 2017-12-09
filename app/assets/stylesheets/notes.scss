@@ -1,0 +1,131 @@
+// Place all the styles related to the Home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+body.notes{
+  color:#333;
+  position: relative;
+  height: auto;
+  min-height: 100% !important;
+  outline:0 !important;
+}
+*{
+  outline:0 !important;
+}
+.paper {
+  font-size:14px;
+  position: relative;
+  background: #f1f1f1;
+  background: -webkit-linear-gradient(top, #DFE8EC 0%, #f1f1f1 8%) 0 57px;
+  background: -moz-linear-gradient(top, #DFE8EC 0%, #f1f1f1 8%) 0 57px;
+  background: linear-gradient(top, #DFE8EC 0%, #f1f1f1 8%) 0 57px;
+  -webkit-background-size: 100% 30px;
+  -moz-background-size: 100% 30px;
+  -ms-background-size: 100% 30px;
+  background-size: 100% 30px;
+  line-height:30px;
+}
+
+.list{
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+
+.list li > .media{
+  cursor:pointer;
+  padding: 15px 10px 0;
+  border-bottom:1px solid #f1f1f1;
+  background-color:#fff;
+}
+
+.list li > .media:hover{
+  background-color:#f9f4cc;
+}
+
+.no-gutter-right{
+  margin-right:0;
+  padding-right:0;
+}
+
+.no-gutter-left{
+  margin-left:0;
+  padding-left:0;
+}
+
+.notes-container{
+  height:100vh;
+  overflow:auto;
+}
+
+.note-container{
+  position:relative;
+}
+
+.note-container textarea{
+  width:100%;
+  height:100vh;
+  padding:29px 50px;
+  border:none;
+}
+
+
+.fab-button{
+  position:absolute !important;
+  bottom:20px;
+  right:20px;
+  z-index:10;
+  border-radius:20px
+}
+
+.new{
+  color:#43b05b;
+}
+
+.new:hover, .new:active, .new:focus{
+  background:none;
+  color:#43b05b;
+}
+
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0;
+    right: 0;
+    background-color: #fff; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.3s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+/* The navigation menu links */
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover{
+    color: #111;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 20px;
+    margin-left: 50px;
+    color:#818181;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}

@@ -12,5 +12,31 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
+//= require select2
 //= require turbolinks
-//= require_tree .
+//= require notes
+// require_tree .
+
+function openNav() {
+    document.getElementById("mySidenav").style.width = "300px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
+
+function autoSaveNote(ele) {
+    textarea = $(ele);
+    if (textarea.length == 1) {
+      id = textarea.data('note-id');
+      body = textarea.val();
+      formData = { "note": {"body": body } }
+      $.ajax({
+        type: "PATCH",
+        url:'/notes/' + id,
+        data: formData,
+        dataType: 'js'
+      });
+    }
+}

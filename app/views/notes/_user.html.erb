@@ -1,0 +1,19 @@
+<div>
+  <h3><b>Share with Users</b></h3>
+  <% if @users.present? %>
+    <%= form_tag share_note_path(@note), remote: true do |f| %>
+    <%= collection_select :user, :ids, @users, :id, :email, {}, { multiple: true, class: "select2 share-notes" } %>
+    <%= collection_select :permission, :ids, Permission.all, :id, :name, {}, { multiple: true, class: "select2 notes-permissions" } %>
+    <%= submit_tag %>
+    <% end %>
+  <% else %>
+    <h4>Apparently this note is shared with all users.</h4>
+  <% end %>
+</div>
+
+<b>Users:</b>
+<ul>
+  <% @note.users.each do |user| %>
+    <li><%= user.email %> <%= link_to "Remove", remove_user_note_path(user_id: user.id), remote: true, method: :delete %></li>
+  <% end %>
+</ul>
