@@ -18,10 +18,11 @@
     <h4 class="muted">Tags added</h4>
     <ul class="nav flex-column">
       <% @note.tags.each do |tag| %>
-        <li class="nav-item">
+
+        <li class="nav-item label label-default tags">
           <span><%= tag.name %></span>
           <span>
-            <%= link_to "Remove", remove_tag_note_path(tag_id: tag.id), remote: true, method: :delete %>
+            <%= link_to "X", remove_tag_note_path(tag_id: tag.id), remote: true, method: :delete, class: 'cross' %>
           </span>
         </li>
       <% end %>

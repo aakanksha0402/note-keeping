@@ -1,2 +1,9 @@
-$('#my-notes').html('<%=j render partial: "notes", locals: {notes: @created_notes} %>');
-$('.note-container').html('<%=j render partial: "show" %>')
+<% if @note.errors.any? %>
+  <% @note.errors.full_messages.each do |message| %>
+    toastr.error('<%= message %>')
+  <% end %>
+<% else %>
+  toastr.success("Note saved!")
+  $('#my-notes').html('<%=j render partial: "notes", locals: {notes: @created_notes} %>');
+  $('.note-container').html('<%=j render partial: "show" %>')
+<% end %>

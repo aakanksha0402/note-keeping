@@ -1,4 +1,6 @@
-<a href="javascript:void(0)" class="pull-right fab-button btn btn-danger"><span onclick="openNav()">Actions</span></a>
+<% if @permissions.has_key?("2") || @permissions.has_key?("3") %>
+ <a href="javascript:void(0)" class="pull-right fab-button btn btn-danger"><span onclick="openNav()">Actions</span></a>
+<% end %>
 
 <% if @permissions.has_key?("1") && @permissions.has_key?("2") %>
   <textarea class="paper edit-note" data-note-id="<%= @note.id %>"><%= @note.body %></textarea>
@@ -29,7 +31,7 @@
           </div>
         <% end %>
 
-        <% if @note.created_by == current_user %>
+        <% if @permissions.has_key?("3") %>
           <div class="delete-note">
             <%= link_to "Delete Note", note_path(@note), method: :delete, remote: true, class: "btn btn-danger btn-lg" %>
           </div>
@@ -39,15 +41,15 @@
   </div>
 </div>
 
-  <script>
-    $(".share-notes" ).select2({'width': '100%',
-                                'placeholder': "Select the users",
-                                'allowClear': true});
-    $(".notes-permissions" ).select2({'width': '100%',
-                                'placeholder': "Select the permissions",
-                                'allowClear': true});
+<script>
+  $(".share-notes" ).select2({'width': '100%',
+                              'placeholder': "Select the users",
+                              'allowClear': true});
+  $(".notes-permissions" ).select2({'width': '100%',
+                              'placeholder': "Select the permissions",
+                              'allowClear': true});
 
-    var note_body = $('textarea.paper.edit-note').val();
-    setInterval(function(){ autoSaveNote(note_body); }, 10000);
+  var note_body = $('textarea.paper.edit-note').val();
+  setInterval(function(){ autoSaveNote(note_body); }, 10000);
 
-  </script>
+</script>

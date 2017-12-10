@@ -1,0 +1,8 @@
+<% if @note.errors.any? %>
+  <% @note.errors.full_messages.each do |message| %>
+    toastr.error('<%= message %>');
+  <% end %>
+<% else %>
+  toastr.info("Note destroyed!");
+  $('#note_container').html('<%=j render partial: "new" %>')
+<% end %>
