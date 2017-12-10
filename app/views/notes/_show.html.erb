@@ -29,7 +29,7 @@
 
         <% if @note.created_by == current_user %>
           <div class="delete-note">
-            <%= link_to "Delete Note", note_path(@note), method: :delete, class: "btn btn-danger btn-lg" %>
+            <%= link_to "Delete Note", note_path(@note), method: :delete, remote: true, class: "btn btn-danger btn-lg" %>
           </div>
         <% end %>
       <% end %>
