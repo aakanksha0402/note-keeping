@@ -41,6 +41,8 @@ gem 'devise'
 
 gem 'twitter-bootstrap-rails'
 
+gem 'toastr-rails'
+
 gem "select2-rails"
 
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'

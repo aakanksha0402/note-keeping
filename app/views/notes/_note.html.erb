@@ -8,7 +8,7 @@
           <p><%= formatted_body(note) %></p>
         </div>
         <div class="pull-right">
-          <span class="label label-danger"><%= note.tags.count %></span>
+          <span class="label label-danger" data-note-id="<%= note.id %>"><%= note.tags.count %></span>
         </div>
       </div>
     <% end %>

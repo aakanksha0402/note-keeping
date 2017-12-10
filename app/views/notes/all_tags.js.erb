@@ -1,1 +1,10 @@
-$('.all-tags').html("<%=j render partial: 'tag' %>")
+<% if @error %>
+  toastr.error('<%= @error %>')
+<% else %>
+  toastr.success('<%= @success %>')
+
+  $('.all-tags').html("<%=j render partial: 'tag' %>");
+  <% if @count %>
+    $('span[data-note-id=<%= @note.id %>]').html("<%= @count %>");
+  <% end %>
+<% end %>

@@ -1,13 +1,19 @@
-$('.all-users').html("<%=j render partial: 'user' %>")
+<% if @error %>
+  toastr.error('<%= @error %>')
+<% else %>
+  toastr.success('<%= @success %>')
 
-$(".share-notes" ).select2({'width': '100%',
-                            'placeholder': "Select the users",
-                            'allowClear': true});
-$(".notes-permissions" ).select2({'width': '100%',
-                            'placeholder': "Select the permissions",
-                            'allowClear': true});
+  $('.all-users').html("<%=j render partial: 'user' %>")
 
-var note_body = $('textarea.paper.edit-note').val();
-setInterval(function(){ autoSaveNote(note_body); }, 10000);
+  $(".share-notes" ).select2({'width': '100%',
+                              'placeholder': "Select the users",
+                              'allowClear': true});
+  $(".notes-permissions" ).select2({'width': '100%',
+                              'placeholder': "Select the permissions",
+                              'allowClear': true});
 
-$('#editNoteUserPermissions').modal('hide');
+  var note_body = $('textarea.paper.edit-note').val();
+  setInterval(function(){ autoSaveNote(note_body); }, 10000);
+
+  $('#editNoteUserPermissions').modal('hide');
+<% end %>
