@@ -13,6 +13,7 @@ Work done for self reference:
                                      7. Use AJAX through out and code clean.
                                      8. Fixes.
 
-10th Dec, 2017 (5:15 PM - 8:00 PM):  1. UI Fixes throughout.
+10th Dec, 2017 (5:15 PM - 9:30 PM):  1. UI Fixes throughout.
                                      2. Bugs Fixes.
                                      3. Improvements and finishing touches.
+                                     4. Set up production.

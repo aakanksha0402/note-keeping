@@ -5,7 +5,9 @@
 <% elsif @permissions.has_key?("1") %>
   <textarea class="paper" data-note-id="<%= @note.id %>"><%= @note.body %></textarea>
 <% else %>
-  <h4>You do not have the permission to view this note.</h4>
+  <div class="no-notes">
+    <h4>You do not have the permission to view this note.</h4>
+  </div>
 <% end %>
 
 <div id="mySidenav" class="sidenav">
