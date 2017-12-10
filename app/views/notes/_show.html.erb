@@ -2,7 +2,7 @@
  <a href="javascript:void(0)" class="pull-right fab-button btn btn-danger"><span onclick="openNav()">Actions</span></a>
 <% end %>
 
-<% if @permissions.has_key?("1") && @permissions.has_key?("2") %>
+<% if (@permissions.has_key?("1") && @permissions.has_key?("2")) || @permissions.has_key?("3") %>
   <textarea class="paper edit-note" data-note-id="<%= @note.id %>"><%= @note.body %></textarea>
 <% elsif @permissions.has_key?("1") %>
   <textarea class="paper" data-note-id="<%= @note.id %>"><%= @note.body %></textarea>
@@ -23,17 +23,17 @@
           <div class="all-users">
             <%= render partial: 'user' %>
           </div>
-        <% end %>
 
-        <% if @permissions.has_key?("2") %>
           <div class="all-tags">
             <%= render partial: 'tag' %>
           </div>
-        <% end %>
 
-        <% if @permissions.has_key?("3") %>
           <div class="delete-note">
             <%= link_to "Delete Note", note_path(@note), method: :delete, remote: true, class: "btn btn-danger btn-lg" %>
+          </div>
+        <% elsif @permissions.has_key?("2") %>
+          <div class="all-tags">
+            <%= render partial: 'tag' %>
           </div>
         <% end %>
       <% end %>
