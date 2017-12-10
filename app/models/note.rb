@@ -1,6 +1,7 @@
 class Note < ApplicationRecord
   enum status: [:active, :deleted]
 
+  # Associations
   belongs_to :created_by, class_name: "User", foreign_key: "created_by_id"
 
   has_many :note_users, dependent: :destroy
@@ -8,10 +9,10 @@ class Note < ApplicationRecord
   has_many :note_tags, dependent: :destroy
   has_many :tags, through: :note_tags
 
+  # Validations
   validates :body, presence: true
 
   def formatted_title
-    # title || truncate(self.body, length: 10)
     self.body[0..10]
   end
 
@@ -24,4 +25,5 @@ class Note < ApplicationRecord
     user_ids << self.created_by_id
     @users = User.where.not(id: user_ids)
   end
+
 end

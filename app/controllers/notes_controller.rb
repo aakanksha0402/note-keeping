@@ -2,11 +2,13 @@ class NotesController < ApplicationController
 
   before_action :authenticate_user!, except: [:index]
 
+  before_action :check_request_type, except: [:index] #Except for index, if request type is html, redirect to root_path. Block HTML request throughout
+
   before_action :set_note, only: [:show, :edit, :update, :destroy, :share, :add_tags, :remove_tag, :remove_user]
 
   before_action :note_permission, only: [:show, :edit, :update, :destroy, :share, :add_tags]
 
-  before_action :set_note_user, only: [:edit_permission, :save_permission]
+  before_action :set_note_user, only: [:edit_permission, :save_permission] # Find user note for permission changing
 
   def index
      if user_signed_in?
@@ -28,7 +30,7 @@ class NotesController < ApplicationController
   end
 
   def edit
-    redirect_to notes_path unless @permissions["2"] == "true"
+    redirect_to notes_path unless @permissions.has_key?("2")
   end
 
   def create
@@ -69,15 +71,15 @@ class NotesController < ApplicationController
   end
 
   def share
-    redirect_to notes_path unless @permissions["3"] == "true"
-    @user_ids = params[:user][:ids].reject { |u| u.empty? }
+    redirect_to notes_path unless @permissions.has_key?("3")
+    redirect_to notes_path if params[:user][:ids].nil?
     permission = params[:permission][:ids].reject { |p| p.empty? }
+    @user_ids = params[:user][:ids].reject { |u| u.empty? } if
     permission_hash = {}
     permission.map {|p| permission_hash["#{p}"] = true}
     @user_ids.map do |user_id|
       n = current_user.shared_notes.new(user_id: user_id, note: @note, permissions: permission_hash )
       n.save
-      puts n.errors.as_json
     end
     get_users
     # @users = User.where.not(id: [current_user.id, @note.created_by.id])
@@ -119,6 +121,7 @@ class NotesController < ApplicationController
   end
 
   def save_permission
+    redirect_to root_path if params[:permissions].nil?
     permission = params[:permissions].reject { |p| p.empty? }
     permission_hash = {}
     permission.map {|p| permission_hash["#{p}"] = true}
@@ -160,5 +163,9 @@ class NotesController < ApplicationController
     def get_users
       # @users = User.where.not(id: [current_user.id, @note.created_by.id])
       @users = @note.all_users_without_this_note
+    end
+
+    def check_request_type
+      redirect_to root_path if request.format.html?
     end
 end

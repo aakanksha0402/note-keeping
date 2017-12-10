@@ -1,6 +1,6 @@
 <div>
-  <h4 class="muted">Share with Users</h4>
   <% if @users.present? %>
+    <h4 class="muted">Share with Users</h4>
     <%= form_tag share_note_path(@note), remote: true do |f| %>
       <div class="form-group">
         <label for="">Users</label>
@@ -9,13 +9,14 @@
 
       <div class="form-group">
         <label for="">Permissions</label>
+        <%= hidden_field_tag 'permission_ids', nil %>
         <%= collection_select :permission, :ids, Permission.all, :id, :name, {}, { multiple: true, class: "select2 notes-permissions" } %>
       </div>
 
       <%= submit_tag "Share", class: "btn btn-primary" %>
     <% end %>
   <% else %>
-    <h4>Apparently this note is shared with all users.</h4>
+    <h4 class="muted">This note is shared with all the users.</h4>
   <% end %>
 </div>
 <br>
@@ -26,11 +27,15 @@
     <h4 class="muted">Shared with</h4>
     <ul class="nav flex-column">
       <% @note.note_users.each do |note_user| %>
+        <% user = note_user.user %>
         <li class="nav-item">
-          <span><%= note_user.user.email %></span>
-          <span><%= link_to "Edit", edit_permission_notes_path(note_user.id), remote:true %> </span>
-          <span><%= link_to "Remove", remove_user_note_path(id: @note.id, user_id: note_user.user.id), remote: true, method: :delete %>
-          </span>
+            <span><%= user == current_user ? "#{user.email} (You)" : note_user.user.email %></span>
+            <% unless user == current_user %>
+              <span><%= link_to "Edit", edit_permission_notes_path(note_user.id), remote:true %></span>
+              <span><%= link_to "Remove", remove_user_note_path(id: @note.id, user_id: note_user.user.id), remote: true, method: :delete %>
+            </span>
+            <% end %>
+
         </li>
       <% end %>
     </ul>

@@ -1,10 +1,14 @@
 class NoteUser < ApplicationRecord
+
+  # Associations
   belongs_to :note
   belongs_to :user
   belongs_to :shared_by, class_name: "User", foreign_key: "shared_by_id", optional: true
 
+  # Validations
   validates_uniqueness_of :note_id, :scope => :user_id
 
+  # Callbacks
   before_save :already_shared
   before_save :revoke_share_permission
 

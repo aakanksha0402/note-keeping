@@ -1,25 +1,27 @@
 <a href="javascript:void(0)" class="pull-right fab-button btn btn-danger"><span onclick="openNav()">Actions</span></a>
 
-<% if @permissions["1"] == "true" && @permissions["2"] == "true" %>
+<% if @permissions.has_key?("1") && @permissions.has_key?("2") %>
   <textarea class="paper edit-note" data-note-id="<%= @note.id %>"><%= @note.body %></textarea>
-<% elsif @permissions["1"] == "true" %>
+<% elsif @permissions.has_key?("1") %>
   <textarea class="paper" data-note-id="<%= @note.id %>"><%= @note.body %></textarea>
 <% else %>
   <h4>You do not have the permission to view this note.</h4>
 <% end %>
 
-  <div id="mySidenav" class="sidenav">
-    <div style="padding:0 20px">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-
-      <div>
-        <% if @permissions["3"] == "true" %>
+<div id="mySidenav" class="sidenav">
+  <div style="padding:0 20px">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <div>
+      <% if @permissions == {} %>
+        Not enoungh permissions
+      <% else %>
+        <% if @permissions.has_key?("3") %>
           <div class="all-users">
             <%= render partial: 'user' %>
           </div>
         <% end %>
 
-        <% if @permissions["2"] == "true" %>
+        <% if @permissions.has_key?("2") %>
           <div class="all-tags">
             <%= render partial: 'tag' %>
           </div>
@@ -30,9 +32,10 @@
             <%= link_to "Delete Note", note_path(@note), method: :delete, class: "btn btn-danger btn-lg" %>
           </div>
         <% end %>
-      </div>
+      <% end %>
     </div>
   </div>
+</div>
 
   <script>
     $(".share-notes" ).select2({'width': '100%',
@@ -44,5 +47,5 @@
 
     var note_body = $('textarea.paper.edit-note').val();
     setInterval(function(){ autoSaveNote(note_body); }, 10000);
-    
+
   </script>

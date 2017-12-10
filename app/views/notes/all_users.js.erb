@@ -8,6 +8,6 @@ $(".notes-permissions" ).select2({'width': '100%',
                             'allowClear': true});
 
 var note_body = $('textarea.paper.edit-note').val();
-setInterval(function(){ autoSaveNote(text); }, 10000);
+setInterval(function(){ autoSaveNote(note_body); }, 10000);
 
 $('#editNoteUserPermissions').modal('hide');

@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  # Validations
   has_many :created_notes, class_name: "Note", foreign_key: 'created_by_id'
   has_many :note_users
   has_many :notes, through: :note_users
