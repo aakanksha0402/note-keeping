@@ -19,11 +19,11 @@
 // require_tree .
 
 function openNav() {
-    document.getElementById("mySidenav").style.width = "300px";
+    document.getElementById("mySidenav").style.right = "0";
 }
 
 function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("mySidenav").style.right = "-350px";
 }
 
 function autoSaveNote(ele) {

@@ -1,5 +1,11 @@
 $('.all-users').html("<%=j render partial: 'user' %>")
 
-$(".share-notes" ).select2();
-$(".notes-permissions" ).select2();
+$(".share-notes" ).select2({'width': '100%',
+                            'placeholder': "Select the users",
+                            'allowClear': true});
+$(".notes-permissions" ).select2({'width': '100%',
+                            'placeholder': "Select the permissions",
+                            'allowClear': true});
 setInterval(function(){ autoSaveNote('textarea.paper.edit-note'); }, 10000);
+
+$('#editNoteUserPermissions').modal('hide');

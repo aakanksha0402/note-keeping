@@ -50,3 +50,4 @@ Gemfile.lock
 .rvmrc
 database.yml
 schema.rb
+log/

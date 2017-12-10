@@ -1,19 +1,44 @@
 <div>
-  <h3><b>Share with Users</b></h3>
+  <h4 class="muted">Share with Users</h4>
   <% if @users.present? %>
     <%= form_tag share_note_path(@note), remote: true do |f| %>
-    <%= collection_select :user, :ids, @users, :id, :email, {}, { multiple: true, class: "select2 share-notes" } %>
-    <%= collection_select :permission, :ids, Permission.all, :id, :name, {}, { multiple: true, class: "select2 notes-permissions" } %>
-    <%= submit_tag %>
+      <div class="form-group">
+        <label for="">Users</label>
+        <%= collection_select :user, :ids, @users, :id, :email, {}, { multiple: true, class: "select2 share-notes form-control" } %>
+      </div>
+
+      <div class="form-group">
+        <label for="">Permissions</label>
+        <%= collection_select :permission, :ids, Permission.all, :id, :name, {}, { multiple: true, class: "select2 notes-permissions" } %>
+      </div>
+
+      <%= submit_tag "Share", class: "btn btn-primary" %>
     <% end %>
   <% else %>
     <h4>Apparently this note is shared with all users.</h4>
   <% end %>
 </div>
+<br>
 
-<b>Users:</b>
-<ul>
-  <% @note.users.each do |user| %>
-    <li><%= user.email %> <%= link_to "Remove", remove_user_note_path(user_id: user.id), remote: true, method: :delete %></li>
+<div class="">
+  <% note_users = @note.note_users %>
+  <% if note_users.present? %>
+    <h4 class="muted">Shared with</h4>
+    <ul class="nav flex-column">
+      <% @note.note_users.each do |note_user| %>
+        <li class="nav-item">
+          <span><%= note_user.user.email %></span>
+          <span><%= link_to "Edit", edit_permission_notes_path(note_user.id), remote:true %> </span>
+          <span><%= link_to "Remove", remove_user_note_path(id: @note.id, user_id: note_user.user.id), remote: true, method: :delete %>
+          </span>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <h5 class="muted">This note is not shared with any user yet.</h5>
   <% end %>
-</ul>
+</div>
+
+<hr>
+
+<br>

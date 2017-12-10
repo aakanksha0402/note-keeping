@@ -1,1 +1,3 @@
 $('.note-container').html('<%=j render partial: "show" %>')
+$('ul.list li').removeClass('active');
+$("ul.list li[data-note-id= <%= @note.id %>]").addClass('active');
