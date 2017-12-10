@@ -6,6 +6,8 @@ $(".share-notes" ).select2({'width': '100%',
 $(".notes-permissions" ).select2({'width': '100%',
                             'placeholder': "Select the permissions",
                             'allowClear': true});
-setInterval(function(){ autoSaveNote('textarea.paper.edit-note'); }, 10000);
+
+var note_body = $('textarea.paper.edit-note').val();
+setInterval(function(){ autoSaveNote(text); }, 10000);
 
 $('#editNoteUserPermissions').modal('hide');

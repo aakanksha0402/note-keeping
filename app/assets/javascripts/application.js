@@ -26,17 +26,22 @@ function closeNav() {
     document.getElementById("mySidenav").style.right = "-350px";
 }
 
-function autoSaveNote(ele) {
-    textarea = $(ele);
+function autoSaveNote(text) {
+    textarea = $('textarea.paper.edit-note');
     if (textarea.length == 1) {
       id = textarea.data('note-id');
       body = textarea.val();
-      formData = { "note": {"body": body } }
-      $.ajax({
-        type: "PATCH",
-        url:'/notes/' + id,
-        data: formData,
-        dataType: 'js'
-      });
+
+      if(text != body){
+        formData = { "note": {"body": body } }
+        $.ajax({
+          type: "PATCH",
+          url:'/notes/' + id,
+          data: formData,
+          dataType: 'js'
+        });
+
+        note_body = body;
+      }
     }
 }

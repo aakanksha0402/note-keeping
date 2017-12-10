@@ -41,5 +41,8 @@
     $(".notes-permissions" ).select2({'width': '100%',
                                 'placeholder': "Select the permissions",
                                 'allowClear': true});
-    // setInterval(function(){ autoSaveNote('textarea.paper.edit-note'); }, 10000);
+
+    var note_body = $('textarea.paper.edit-note').val();
+    setInterval(function(){ autoSaveNote(note_body); }, 10000);
+    
   </script>
