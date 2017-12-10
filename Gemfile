@@ -43,10 +43,11 @@ gem 'twitter-bootstrap-rails'
 
 gem "select2-rails"
 
+gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
-  gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 
   # gem 'rspec-rails', '~> 3.6'
   # gem 'rspec-activemodel-mocks', '= 1.0.1'
