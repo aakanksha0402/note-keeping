@@ -1,16 +1,49 @@
-<h2>Forgot your password?</h2>
+<div class='authentication'>
+  <div class="container">
+    <div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="panel panel-login">
+					<div class="panel-heading">
+						<div class="row">
+							<div class="col-xs-12">
+                <%= link_to "Forgot your password?", user_session_path, id: "login-form-link" %>
+							</div>
+						</div>
+						<hr>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-md-12">
+                <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
+                  <div class="form-group">
+                    <% if resource.errors %>
+                      <div class="form-group">
+                        <% if resource.errors.any? %>
+                          <div class="alert alert-danger" role="alert">
+                            <%= "Email #{resource.errors[:email].first}" if resource.errors.has_key?(:email) %>
+                          </div>
+                        <% end %>
+                      </div>
+                    <% end %>
+                  </div>
+                  <div class="form-group">
+                    <%= f.email_field :email, autofocus: true, class: "form-control", placeholder: "Email" %>
+									</div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+									<div class="form-group">
+										<div class="row">
+											<div class="col-sm-6 col-sm-offset-3">
+                          <%= f.submit "Reset Password", id: "reset-password-submit", class: "form-control btn btn-login" %>
+											</div>
+										</div>
+									</div>
+								<% end %>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

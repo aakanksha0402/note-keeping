@@ -1,9 +1,15 @@
-<li>
-  <div class="media" data-note-id="<%= note.id %>">
+<li data-note-id="<%= note.id %>">
+  <div class="media">
     <%= link_to note_path(note), remote: true do %>
       <div class="media-body">
-        <h4 class="media-heading"><%= note.formatted_title %></h4>
-        <p><%= formatted_body(note) %></p>
+        <div class="pull-left">
+
+          <h4 class="media-heading"><%= note.formatted_title %></h4>
+          <p><%= formatted_body(note) %></p>
+        </div>
+        <div class="pull-right">
+          <span class="label label-danger"><%= note.tags.count %></span>
+        </div>
       </div>
     <% end %>
   </div>

@@ -1,0 +1,20 @@
+<div class="modal-header">
+  <h5 class="modal-title">Change Permissions for <strong><%= @note_user.user.email %></strong> </h5>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<%= form_tag save_permission_notes_path(@note_user), method: :patch, remote: true do %>
+  <div class="modal-body text-center">
+    <div class="btn-group" data-toggle="buttons">
+      <% @permissions.each do |permission| %>
+        <% active_class = @note_user.permissions["#{permission.id}"] == "true" ? true : false %>
+        <%= render partial: 'permission', locals: {active_class: active_class, permission: permission} %>
+      <% end %>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <%= submit_tag "Update Permissions", class: "btn btn-success" %>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  </div>
+<% end %>

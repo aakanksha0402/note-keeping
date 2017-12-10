@@ -1,0 +1,11 @@
+<% if active_class %>
+  <label class='btn btn-primary btn-lg active'>
+    <%= check_box_tag 'permissions[]', permission.id, true %>
+    <%= permission.name.titleize %>
+  </label>
+<% else %>
+  <label class='btn btn-primary btn-lg'>
+    <%= check_box_tag 'permissions[]', permission.id %>
+    <%= permission.name.titleize %>
+  </label>
+<% end %>

@@ -6,6 +6,7 @@ class NoteUser < ApplicationRecord
   validates_uniqueness_of :note_id, :scope => :user_id
 
   before_save :already_shared
+  before_save :revoke_share_permission
 
   def already_shared
     note = self.note
@@ -26,9 +27,21 @@ class NoteUser < ApplicationRecord
     end
   end
 
+  def revoke_share_permission
+    if self.permissions_changed?
+      permission = self.changes["permissions"]
+
+      previous_p = permission.first
+      new_p = permission.second
+
+      if previous_p.has_key?("3") && new_p.has_key?("3") == false
+        delete_shared_notes
+      end
+    end
+  end
+
   def delete_shared_notes
-    to_be_deleted = NoteUser.where(shared_by: self.user).pluck(:id)
-    puts to_be_deleted
+    to_be_deleted = NoteUser.where(shared_by: self.user).destroy_all
   end
 
 end

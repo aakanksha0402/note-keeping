@@ -3,12 +3,16 @@ class NotesController < ApplicationController
   before_action :authenticate_user!, except: [:index]
 
   before_action :set_note, only: [:show, :edit, :update, :destroy, :share, :add_tags, :remove_tag, :remove_user]
+
   before_action :note_permission, only: [:show, :edit, :update, :destroy, :share, :add_tags]
+
+  before_action :set_note_user, only: [:edit_permission, :save_permission]
 
   def index
      if user_signed_in?
       @created_notes = current_user.created_notes.all.order(updated_at: :desc)
       @shared_with_notes = current_user.note_users.all.order(updated_at: :desc)
+      @note = current_user.created_notes.new
     else
       redirect_to user_session_path
     end
@@ -110,11 +114,34 @@ class NotesController < ApplicationController
     end
   end
 
+  def edit_permission
+    @permissions = Permission.all.order(:id)
+  end
+
+  def save_permission
+    permission = params[:permissions].reject { |p| p.empty? }
+    permission_hash = {}
+    permission.map {|p| permission_hash["#{p}"] = true}
+
+    @note_user.update(permissions: permission_hash)
+
+    @note = @note_user.note
+    get_users
+
+    respond_to do |format|
+        format.js { render :file => "notes/all_users.js.erb" }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_note
       @note = current_user.created_notes.find_by(id: params[:id])
       @note = current_user.notes.find(params[:id]) unless @note
+    end
+
+    def set_note_user
+      @note_user = NoteUser.find(params[:note_user_id])
     end
 
     def note_permission

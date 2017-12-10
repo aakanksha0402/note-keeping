@@ -1,5 +1,8 @@
-<h1>New Note</h1>
-
-<%= render 'form', note: @note %>
-
-<%= link_to 'Back', notes_path %>
+<%= form_for(@note, remote: true) do |f| %>
+  <div>
+    <%= f.text_area :body, class: "paper" %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Save Note", class: "pull-right fab-button btn btn-danger" %>
+  </div>
+<% end %>
