@@ -52,8 +52,10 @@ class NotesController < ApplicationController
   end
 
   def destroy
-    @note.destroy
-    @note = current_user.created_notes.new
+    if @note.destroy
+      get_created_and_shared_notes
+      @note = current_user.created_notes.new
+    end
     respond_to do |format|
       format.js
     end

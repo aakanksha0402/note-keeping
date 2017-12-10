@@ -1,0 +1,6 @@
+<ul class="list">
+  <% @shared_with_notes.each do |user_note| %>
+    <% note = user_note.note %>
+    <%= render partial: 'note', locals: { note: note } %>
+  <% end %>
+</ul>

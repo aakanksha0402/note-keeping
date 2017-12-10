@@ -26,12 +26,7 @@
             <%= render partial: "notes", locals: { notes: @created_notes } %>
           </div>
           <div role="tabpanel" class="tab-pane" id="shared-notes">
-            <ul class="list">
-              <% @shared_with_notes.each do |user_note| %>
-                <% note = user_note.note %>
-                <%= render partial: 'note', locals: { note: note } %>
-              <% end %>
-            </ul>
+            <%= render partial: "shared_notes", locals: { notes: @shared_with_notes } %>
           </div>
         </div>
 
@@ -44,7 +39,7 @@
 
       <div class="modal fade" id="editNoteUserPermissions" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
-          <div class="modal-content">            
+          <div class="modal-content">
           </div>
         </div>
       </div>

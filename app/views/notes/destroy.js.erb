@@ -4,5 +4,7 @@
   <% end %>
 <% else %>
   toastr.info("Note destroyed!");
+  $('#my-notes').html('<%=j render partial: "notes", locals: { notes: @created_notes } %>');
+  $('#shared-notes').html('<%=j render partial: "shared_notes", locals: { notes: @shared_with_notes } %>');
   $('#note_container').html('<%=j render partial: "new" %>')
 <% end %>
